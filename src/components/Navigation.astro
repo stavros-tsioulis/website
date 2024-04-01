@@ -1,0 +1,99 @@
+---
+import { getTranslationFunctionFromSetLocale, type Locale, languages } from "../i18n/ui"
+import Link from "./common/Link.astro";
+
+type Props = {
+  lang: Locale
+}
+
+const { lang } = Astro.props
+
+const translate = getTranslationFunctionFromSetLocale(lang)
+---
+<style>
+  html {
+    --navWidth: 42rem;
+  }
+
+  @media (max-width: 400px) {
+    html {
+      --navWidth: 20rem;
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes navExpand {
+    from { width: 0; }
+    to { width: var(--navWidth) }
+  }
+</style>
+
+<nav
+  class="inline-flex items-center justify-between gap-2 md:gap-4 rounded-full bg-[#2e0f03] shadow-2xl mx-4 md:px-8 px-4 md:py-4 py-2"
+  style="
+    width: 0;
+    opacity: 0;
+
+    animation:
+      250ms ease-out 1s fadeIn forwards,
+      300ms ease-out 1.25s navExpand forwards;
+  "
+>
+  <ul class="flex items-center gap-2 md:gap-4">
+    <li
+      style="
+        opacity: 0;
+        animation: 250ms ease-out 1.75s fadeIn forwards;
+      "
+    >
+      <a href="#home" class="md:text-lg transition hover:text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path class="pointer-events-none" d="M5 12H3l9-9l9 9h-2M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M10 12h4v4h-4z"/></g></svg>
+      </a>
+    </li>
+    <li
+      style="
+        opacity: 0;
+        animation: 250ms ease-out 1.85s fadeIn forwards;
+      "
+    >
+      <a href="#biography" class="md:text-lg p-2 transition hover:text-primary">
+        {translate('nav.biography')}
+      </a>
+    </li>
+  </ul>
+  <div class="flex gap-2 md:gap-4">
+    <ul
+      class="flex transition text-sm md:text-base bg-transparent text-neutral-300 py-2"
+      style="opacity: 0; animation: 250ms ease-out 2s fadeIn forwards;"
+    >
+      {Object.entries(languages).map(([langSelection, name]) => (
+        <li
+          value={langSelection}
+          class:list={{
+            'text-primary': langSelection === lang
+          }}
+        >
+          <a href={`/${langSelection}`} class="uppercase p-2 hover:bg-[#f87c4f33] focus:bg-[#f87c4f33] focus:outline-none cursor-pointer rounded-md">
+            { langSelection }
+          </a>
+        </li>
+      ))}
+    </ul>
+    <!-- <Link type="primary" href="#contact">
+      <span
+        class="md:text-lg"
+        style="
+          opacity: 0;
+  
+          animation: 250ms ease-out 2.25s fadeIn forwards;
+        "
+      >
+        { translate('nav.contact') }
+      </span>
+    </Link> -->
+  </div>
+</nav>

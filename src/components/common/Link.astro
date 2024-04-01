@@ -1,0 +1,32 @@
+---
+type Props = {
+  href: string
+  type: 'primary' | 'secondary'
+  style?: string
+  inline?: boolean
+  noPadding?: boolean
+  class?: string
+  external?: boolean
+}
+
+const { href, type, inline, external, noPadding } = Astro.props
+---
+
+<a
+  {...{...Astro.props, type: undefined, class: undefined}}
+  href={href}
+  class="inline-flex gap-4 items-center hover:underline transition rounded-md"
+  target={external ? '_blank' : undefined}
+  class:list={[
+    {
+      'text-[#f87c4f] hover:bg-[#f87c4f33]': type === 'primary',
+      'py-1 px-2': !inline && !noPadding,
+      'px-1': inline && !noPadding,
+    },
+    Astro.props.class
+  ]}
+>
+  <slot name="iconLeft" />
+  <slot />
+  <slot name="iconRight" />
+</a>

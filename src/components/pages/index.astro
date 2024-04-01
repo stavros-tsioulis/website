@@ -1,0 +1,92 @@
+---
+import Hero from "../../components/index/Hero.astro"
+import GlobalStyles from "../../styles/GlobalStyles.astro";
+import MarkdownStyles from "../../styles/Markdown.astro"
+import Fonts from "../../styles/Fonts.astro";
+import Navigation from "../../components/Navigation.astro";
+import Spinner from "../../components/Spinner.astro";
+import SectionBiography from "../index/SectionBiography.astro";
+import SectionContact from "../index/SectionContact.astro";
+import { getTranslationFunctionFromSetLocale, type Locale } from "../../i18n/ui"
+
+type Props = {
+  lang: Locale
+}
+
+const { lang } = Astro.props
+
+const translate = getTranslationFunctionFromSetLocale(lang)
+---
+
+<style is:global>
+	.animateShow {
+		opacity: 0;
+		animation: 250ms ease-out 250ms fadeIn forwards;
+	}
+
+	.contentLoading * :not(.spinner):not(.spinnerContainer):not(.spinnerPath) {
+		animation: none !important;
+	}
+
+	.spinnerContainer {
+		opacity: 0;
+		pointer-events: none;
+		display: flex;
+		position: fixed;
+		top: 0;
+		height: 100dvh;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.contentLoading .spinnerContainer {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+
+<html lang={lang === 'en' ? 'en' : 'el'}>
+	<head>
+		<meta charset="utf-8" />
+		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<Fonts />
+		<GlobalStyles />
+		<MarkdownStyles />
+		<title>{translate('hero.main')}</title>
+		<meta name="description" content={translate('hero.description')} />
+	</head>
+	<body class="bg-black contentLoading">
+		<div class="spinnerContainer transition-opacity bg-black z-[2]">
+			<Spinner />
+		</div>
+
+		<div class="fixed flex justify-center top-4 z-[2] w-full">
+			<Navigation lang={lang} />
+		</div>
+		<div class="h-[20vh]">
+
+		</div>
+		<article class="relative z-[1]">
+			<Hero lang={lang} />
+			<img
+				class="mt-16 z-0 left-0 top-0 w-full object-cover"
+				src="/img/keyboard.jpg"
+				alt="macbook-air-keyboard"
+				style="opacity: 0"
+				onload="this.classList.add('animateShow'); document.body.classList.remove('contentLoading')"
+			/>
+			<div class="mt-16 space-y-16 animateShow bg-gradient-to-b from-black to-background pb-64">				
+				<SectionBiography lang={lang} />
+				<SectionContact lang={lang} />
+			</div>
+		</article>
+	</body>
+</html>

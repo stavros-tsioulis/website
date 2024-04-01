@@ -1,0 +1,17 @@
+---
+type Props = {
+  type: 'primary' | 'secondary'
+}
+
+const { type } = Astro.props
+---
+<button
+  class="px-4 py-2 rounded-md inline-flex items-center gap-4"
+  class:list={{
+    'bg-primary text-white': type === 'primary'
+  }}
+>
+  <slot name="iconLeft" />
+  <slot />
+  <slot name="iconRight" />
+</button>

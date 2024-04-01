@@ -1,0 +1,67 @@
+---
+import { getTranslationFunctionFromSetLocale, type Locale } from "../../i18n/ui"
+import Link from "../common/Link.astro"
+
+type Props = {
+  lang: Locale
+}
+
+const { lang } = Astro.props
+
+const translate = getTranslationFunctionFromSetLocale(lang)
+---
+
+<style>
+  .meImage {
+    opacity: 0;
+    animation: 250ms ease-out 500ms fadeIn forwards
+  }
+
+  .hero {
+    opacity: 0;
+    animation: 250ms ease-out 750ms fadeIn forwards
+  }
+
+  .hero-description {
+    opacity: 0;
+    animation: 250ms ease-out 900ms fadeIn forwards
+  }
+
+  .hero-learn-more {
+    opacity: 0;
+    animation: 250ms ease-out 1050ms fadeIn forwards
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+
+<header id="home" class="max-w-7xl mx-auto px-4 sm:px-8 2xl:px-0 scroll-m-96 grid md:grid-cols-[10rem_1fr] grid-cols-[5rem_1fr] gap-4">
+  <img src="/img/me.jpg" alt="stavros-tsioulis" class="rounded-full meImage" />
+  <div> 
+    <h1
+      class="hero text-4xl md:text-7xl"
+    >
+      { translate('hero.main') }
+    </h1>
+    <p
+      class="hero-description md:text-lg font-light mt-4 mb-4 max-w-lg"
+    >
+      { translate('hero.description') }
+    </p>
+    <Link
+      type="primary"
+      href="#biography"
+      class="hero-learn-more"
+    >
+      <span class="text-lg">
+        { translate('hero.learnMore') }
+      </span>
+      <svg slot="iconRight" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M13.3 17.275q-.3-.3-.288-.725t.313-.725L16.15 13H5q-.425 0-.713-.288T4 12q0-.425.288-.713T5 11h11.15L13.3 8.15q-.3-.3-.3-.713t.3-.712q.3-.3.713-.3t.712.3L19.3 11.3q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.6 4.6q-.275.275-.687.275t-.713-.3Z"/>
+      </svg>
+    </Link>
+  </div>
+</header>

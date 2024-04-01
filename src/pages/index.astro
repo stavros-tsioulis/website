@@ -1,0 +1,28 @@
+---
+const preferredLangs = Astro.request.headers.get('accept-language')
+
+if (preferredLangs) {
+	const weights: Record<string, number> = {}
+
+	preferredLangs.split(',').forEach(lang => {
+		if (lang.includes(';')) {
+			weights[lang] = parseFloat(lang.split(';')[1])
+		} else {
+			weights[lang] = 1
+		}
+	})
+
+	const highestPreferrence = Object
+		.entries(weights)
+		.sort((a, b) => b[1] - a[1])
+		[0][0]
+
+	if (highestPreferrence === 'el') {
+		return Astro.redirect('/gr')
+	} else {
+		return Astro.redirect('/en')
+	}
+} else {
+	return Astro.redirect('/en')
+}
+---
