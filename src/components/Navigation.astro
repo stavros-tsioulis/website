@@ -1,6 +1,5 @@
 ---
 import { getTranslationFunctionFromSetLocale, type Locale, languages } from "../i18n/ui"
-import Link from "./common/Link.astro";
 
 type Props = {
   lang: Locale
@@ -50,8 +49,10 @@ const translate = getTranslationFunctionFromSetLocale(lang)
         animation: 250ms ease-out 1.75s fadeIn forwards;
       "
     >
-      <a href="#home" class="md:text-lg transition hover:text-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path class="pointer-events-none" d="M5 12H3l9-9l9 9h-2M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M10 12h4v4h-4z"/></g></svg>
+      <a tabindex="-1" href="#home" class="md:text-lg transition hover:text-primary h-full">
+        <button tabindex="0" class="flex items-center focus-within:outline-2 focus-within:outline-primary py-2 px-1 -mr-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path class="pointer-events-none" d="M5 12H3l9-9l9 9h-2M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M10 12h4v4h-4z"/></g></svg>
+        </button>
       </a>
     </li>
     <li
