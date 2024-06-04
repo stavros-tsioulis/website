@@ -8,6 +8,7 @@ import Spinner from "../../components/Spinner.astro";
 import SectionBiography from "../index/SectionBiography.astro";
 import SectionContact from "../index/SectionContact.astro";
 import { getTranslationFunctionFromSetLocale, type Locale } from "../../i18n/ui"
+import SectionSkills from "../index/SectionSkills.astro";
 
 type Props = {
   lang: Locale
@@ -83,7 +84,8 @@ const translate = getTranslationFunctionFromSetLocale(lang)
 				style="opacity: 0"
 				onload="this.classList.add('animateShow'); document.body.classList.remove('contentLoading')"
 			/>
-			<div class="mt-16 space-y-16 animateShow bg-gradient-to-b from-black to-background pb-64">				
+			<div class="mt-16 space-y-16 animateShow bg-gradient-to-b from-black to-background pb-64">
+				<SectionSkills lang={lang} />
 				<SectionBiography lang={lang} />
 				<SectionContact lang={lang} />
 			</div>

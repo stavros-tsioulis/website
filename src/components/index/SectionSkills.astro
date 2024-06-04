@@ -1,0 +1,31 @@
+---
+import { getTranslationFunctionFromSetLocale, type Locale } from "../../i18n/ui"
+
+type Props = {
+  lang: Locale
+}
+
+const { lang } = Astro.props
+
+const translate = getTranslationFunctionFromSetLocale(lang)
+---
+
+<div id="skills" class="max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto scroll-m-32">
+  <h2 class="text-primary text-4xl md:text-7xl leading-tight font-light mb-16">
+    { translate('section.skillset.title')}
+  </h2>
+  <table class="space-y-2 rounded-md p-2 bg-neutral-900">
+    <tbody class="divide-y divide-neutral-700">
+      {translate('section.skillset.items').map(item => (
+        <tr class="*:p-2 divide-x divide-neutral-600 even:bg-neutral-800">
+          <th class="font-semibold text-primary text-left">
+            {item.title}
+          </th>
+          <td>
+            {item.description}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -13,8 +13,8 @@ const translate = getTranslationFunctionFromSetLocale(lang)
 const biography = await import(`../../content/biography.${lang}.md`)
 
 const projects = await Promise.all([
-  import(`../../content/projects/provollee.${lang}.md`),
   import(`../../content/projects/namicomi.${lang}.md`),
+  import(`../../content/projects/provollee.${lang}.md`),
 ])
 ---
 
@@ -34,7 +34,7 @@ const projects = await Promise.all([
           <div class="mx-auto w-[1px] h-full bg-primary rounded-full" />
         </div>
         <div class="mb-16">
-          <h3 class="mb-4 md:flex items-center gap-2 mt-2">
+          <h3 class="md:flex items-center gap-2 mt-2">
             <Link external noPadding type="primary" href={project.href} class="md:text-3xl text-xl py-1 px-0 md:px-2">
               {project.title}
               <svg class="h-6 w-6" slot="iconRight" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5H8.2c-1.12 0-1.68 0-2.108.218a1.999 1.999 0 0 0-.874.874C5 6.52 5 7.08 5 8.2v7.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h7.606c1.118 0 1.677 0 2.104-.218c.377-.192.683-.498.875-.874c.218-.428.218-.987.218-2.105V14m1-5V4m0 0h-5m5 0l-7 7"/></svg>
@@ -43,6 +43,13 @@ const projects = await Promise.all([
               {project.date}
             </div>
           </h3>
+          <p
+            class="mb-4 mt-2"
+          >
+            <span class="text-xs sm:text-sm md:text-base px-2 sm:px-4 py-1 rounded-full leading-[0] font-semibold text-primary bg-gradient-to-b from-accent via-15% via-primary-translucent to-primary-translucent">
+              {project.role}
+            </span>
+          </p>
           <ul class="flex flex-wrap gap-4 mb-8">
             {projects[index].frontmatter.sampleImages.map((image: string, imageIndex: number) => (
               <li>

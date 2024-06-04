@@ -1,17 +1,23 @@
+/**
+ * Get a list of strings that we can use to deeply key an object
+ */
 export type DeepKeys<T> = T extends (infer U)[]
   ? U extends object
-    // @ts-expect-error
     ? `[].${DeepKeys<U>}` | '[]'
     : '[]'
   : T extends object
     ? {
       [K in keyof T]: T[K] extends object
-      // @ts-expect-error
-      ? `${K}.${DeepKeys<T[K]>}` | `${K}`
-      : K
+				? K extends string
+      		? `${K}.${DeepKeys<T[K]>}` | `${K}`
+					: never
+      	: K
     }[keyof T]
-  : never
+    : never
 
+/**
+ * Using a DeepKey, get the type corresponding to it in the object
+ */
 export type DeepPropertyType<T, K extends DeepKeys<T>> = K extends keyof T
   ? T[K]
   : K extends '[]'
@@ -30,8 +36,9 @@ export type DeepPropertyType<T, K extends DeepKeys<T>> = K extends keyof T
             ? U
             : never
           : FirstKey extends DeepKeys<T>
-            // @ts-expect-error we are sure that DeepPropertyType<T, FirstKey> is an array
-            ? DeepPropertyType<T, FirstKey>[number]
+						? DeepPropertyType<T, FirstKey> extends (infer V)[]
+							? V
+							: never
             : never
         : K extends `${infer FirstKey}.${infer RestKeys}`
           ? FirstKey extends keyof T
@@ -50,49 +57,40 @@ export const ui = {
   en: {
     hero: {
       main: 'Stavros Tsioulis',
-      description: 'I am a full-stack developer with 3 years of experience, specialized in the JavaScript/TypeScript ecosystem, as well as frameworks like React, Vue, Astro, Express, Ts.ED.',
+      description: 'I am a full-stack developer with 4 years of experience, specialized in the JavaScript/TypeScript ecosystem, as well as technologies like React, Vue, Angular, Astro, Express, Ts.ED, NestJS. Isn\'t the picture below cool? I shot it.',
       learnMore: 'More',
     },
     nav: {
       home: 'Home',
-      biography: 'Biο',
+      info: 'Info',
       contact: 'Contact'
     },
     section: {
-      experience: {
-        title: 'Experience',
-        items: {
-          security: {
-            title: 'Securtity',
-            description: 'The security of a web application is the most important factor I take into consideration during the programming process.'
-          },
-          speed: {
-            title: 'Speed',
-            description: 'Speed makes a website stand out in use. I learn the latest methods of optimizing the speed of loading and execution of a page\'s code every day.'
-          },
-          easeOfUse: {
-            title: 'Ease of use',
-            description: 'The practice I follow when designing websites is to put myself in the shoes of a user using different devices and usage conditions, covering the widest possible range of usage of the solutions I build, avoiding the tunnel-vision that is created.'
-          },
-          support: {
-            title: 'Support',
-            description: 'Especially for a web application, maintenance can be the most costly factor. I make sure my code is clean and easy to read to minimize maintenance costs.'
-          }
-        }
+      skillset: {
+        title: "Skills & Knowledge",
+        items: [
+          { title: "Languages", description: "JavaScript, TypeScript, Python, C, C++, Rust" },
+          { title: "Languages (human ones)", description: "Greek, English, Japanese (N3)" },
+          { title: "Frameworks and Libraries (FE)", description: "React/Next, Vue/Nuxt, Angular, Astro" },
+          { title: "Frameworks and Libraries (BE)", description: "Express, Ts.ED, NestJS, MySQL, MongoDB, TypeORM" },
+          { title: "Devops", description: "Basic Cloudflare literacy: Pages, Workers, Tunnels. VPS setup; certificate management." },
+        ],
       },
       biography: {
         title: 'Biography',
         items: [
           {
-            date: 'February 2023',
-            title: 'Provollee',
-            href: 'https://provollee.gr',
+            date: 'March 2023 - Present',
+            title: 'NamiComi',
+            href: 'https://namicomi.com',
+            role: "Lead Frontend Developer"
           },
           {
-            date: 'March 2023',
-            title: 'NamiComi (Open Beta)',
-            href: 'https://namicomi.com',
-          }
+            date: 'February 2023 - March 2023',
+            title: 'Provollee',
+            href: 'https://provollee.gr',
+            role: "Website Developer"
+          },
         ]
       },
       contact: {
@@ -103,49 +101,40 @@ export const ui = {
   gr: {
     hero: {
       main: 'Σταύρος Τσιούλης',
-      description: 'Είμαι full-stack developer με 3 έτη εμπειρίας, εξειδικευμένος στο οικοσύστημα της JavaScript/TypeScript, καθώς και frameworks όπως React, Vue, Astro, Express, Ts.ED.',
+      description: 'Είμαι full-stack developer με 4 έτη εμπειρίας, εξειδικευμένος στο οικοσύστημα της JavaScript/TypeScript, καθώς και frameworks όπως React, Vue, Angular, Astro, Express, Ts.ED. Ωραία η κάτω φωτογραφία; Εγώ την έβγαλα.',
       learnMore: 'Περισσότερα',
     },
     nav: {
       home: 'Αρχική',
-      biography: 'Βιογραφία',
+      info: 'Πληροφορίες',
       contact: 'Επικοινωνία'
     },
     section: {
-      experience: {
-        title: 'Εμπειρία',
-        items: {
-          security: {
-            title: 'Ασφάλεια',
-            description: 'Η ασφάλεια μιας διαδικτυακής εφαρμογής είναι ο πιο σημαντικός παράγοντας που λαμβάνω υπόψιν κατά την διαδικασία του προγραμματισμού.'
-          },
-          speed: {
-            title: 'Ταχύτητα',
-            description: 'Η ταχύτητα κάνει μια ιστοσελίδα να ξεχωρίζει στη χρήση. Μαθαίνω καθημερινά τις πιο πρόσφατες μεθόδους βελτιστοποίησης της ταχύτητας φόρτωσης και εκτέλεσης του κώδικα μιας σελίδας.'
-          },
-          easeOfUse: {
-            title: 'Ευκολία',
-            description: 'Η πρακτική που ακολουθώ όταν σχεδιάζω ιστοσελίδες είναι να μπαίνω στη θέση ενός χρήστη χρησιμοποιώντας διάφορες συσκευές και συνθήκες χρήσης, καλύπτοντας το όσο το δυνατόν μεγαλύτερο εύρος χρήσης των λύσεων που φτιάχνω, αποφεύγοντας το tunnel-vision που δημιουργείται.'
-          },
-          support: {
-            title: 'Συντήρηση',
-            description: 'Ειδικότερα για μια διαδικτυακή εφαρμογή, η συντήρηση μπορεί να γίνει ο παράγοντας με το μεγαλύτερο κόστος. Φροντίζω ο κώδικάς μου να είναι καθαρός και εύκολος στην ανάγνωση για να ελαχιστοποιήσουν το κόστος συντήρησης.'
-          }
-        }
+      skillset: {
+        title: "Δεξιότητες & Γνώσεις",
+        items: [
+          { title: "Γλώσσες", description: "JavaScript, TypeScript, Python, C, C++, Rust" },
+          { title: "Γλώσσες (ανρθώπινες)", description: "Greek, English, Japanese (N3)" },
+          { title: "Frameworks και βιβλιοθήκες (FE)", description: "React/Next, Vue/Nuxt, Angular, Astro" },
+          { title: "Frameworks και βιβλιοθήκες (BE)", description: "Express, Ts.ED, NestJS, MySQL, MongoDB, TypeORM" },
+          { title: "Devops", description: "Basic Cloudflare literacy: Pages, Workers, Tunnels. VPS setup; certificate management." },
+        ],
       },
       biography: {
         title: 'Βιογραφία.',
         items: [
           {
-            date: 'Φεβρουάριος 2023',
-            title: 'Provollee',
-            href: 'https://provollee.gr',
-          },
-          {
             date: 'Μάρτιος 2023',
             title: 'NamiComi (Open Beta)',
             href: 'https://namicomi.com',
-          }
+            role: "Lead Frontend Developer"
+          },
+          {
+            date: 'Φεβρουάριος 2023',
+            title: 'Provollee',
+            href: 'https://provollee.gr',
+            role: "Website Developer"
+          },
         ]
       },
       contact: {

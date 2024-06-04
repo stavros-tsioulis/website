@@ -6,8 +6,10 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: 'var(--primary)',
+				"primary-translucent": 'var(--primary-translucent)',
 				secondary: 'var(--secondary)',
-				background: 'var(--background)'
+				background: 'var(--background)',
+				accent: 'var(--accent)',
 			}
 		},
 	},

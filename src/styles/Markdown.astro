@@ -3,7 +3,16 @@
     font-weight: 600;
     font-size: 2rem;
     margin-bottom: 1rem;
+    margin-top: 1rem;
     line-height: 2.5rem;
+  }
+
+  .markdown h2 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    line-height: 2rem;
   }
 
   .markdown p {
@@ -22,5 +31,33 @@
 
   .markdown ul li::marker {
     color: var(--primary);
+  }
+
+  .markdown a {
+    color: var(--primary)
+  }
+
+  .markdown a::after {
+    content: "";
+    color: var(--primary);
+    background-image: url("../../public/img/extUrl.svg");
+    background-size: contain;
+    border-radius: 2px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    filter: invert(43%) sepia(70%) saturate(2093%) hue-rotate(14deg) brightness(97%) contrast(119%);
+  }
+
+  .markdown a:hover {
+    text-decoration: underline;
+  }
+  
+  .markdown code {
+    color: var(--primary);
+    background-color: #222222;
+    border-radius: 2px;
+    padding: 0 0.25rem;
   }
 </style>

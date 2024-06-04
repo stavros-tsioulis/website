@@ -6,11 +6,15 @@ sampleImages:
   - /img/sample/provollee2.jpg
 ---
 
-# Simple. Straightforward landing page for a Creative Agency.
+# A Creative Agency's landing page
 
-The first partnership was simple. The Provollee team had just put themselves into the web and e-shop building scene, and needed a simple and direct landing page.
-
-- To ensure the smooth running of the site\'s lightweight animations, we chose the React framework in order to take advantage of the excellent framer-motion library.
-- In order to prepare the website for the future, the necessary anti-DDoS, caching, and metrics tools were prepared so as to provide immediate information about the state of the servers to admins.
-
+The Provollee team had just put themselves into the web and e-shop building scene, and needed a simple and direct landing page.
 The site is no longer accessible, however, as the owners have changed their focus to other markets.
+
+## Tech stack
+React, Tailwind, Framer Motion.
+
+## Skills nurtured
+- First professional experience using React and Tailwind;
+- [Framer Motion](https://github.com/framer/motion): Animation orchetration for the Hero content;
+- Devops: The website was hosted manually on a dedicated server. I managed certificates using letsencrypt, and configured a reverse proxy using HAProxy to inject the certificate to the response headers, and then worked with Cloudflare Tunnels to proxy traffic securely to the server.
