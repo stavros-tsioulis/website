@@ -57,7 +57,7 @@ export const ui = {
   en: {
     hero: {
       main: 'Stavros Tsioulis',
-      description: 'I am a full-stack developer with 4 years of experience, specialized in the JavaScript/TypeScript ecosystem, as well as technologies like React, Vue, Angular, Astro, Express, Ts.ED, NestJS. Isn\'t the picture below cool? I shot it.',
+      description: 'I am a full-stack developer with 4 years of experience, specialized in the JavaScript/TypeScript ecosystem, as well as technologies like React, Vue, Angular, Astro, Express, Ts.ED, NestJS. I can shoot cool pictures like the one below.',
       learnMore: 'More',
     },
     nav: {
@@ -101,7 +101,7 @@ export const ui = {
   gr: {
     hero: {
       main: 'Σταύρος Τσιούλης',
-      description: 'Είμαι full-stack developer με 4 έτη εμπειρίας, εξειδικευμένος στο οικοσύστημα της JavaScript/TypeScript, καθώς και frameworks όπως React, Vue, Angular, Astro, Express, Ts.ED. Ωραία η κάτω φωτογραφία; Εγώ την έβγαλα.',
+      description: 'Είμαι full-stack developer με 4 έτη εμπειρίας, εξειδικευμένος στο οικοσύστημα της JavaScript/TypeScript, καθώς και frameworks όπως React, Vue, Angular, Astro, Express, Ts.ED. Μπορώ να βγάλω ελκυστικές φωτογραφίες όπως αυτή παρακάτω.',
       learnMore: 'Περισσότερα',
     },
     nav: {
